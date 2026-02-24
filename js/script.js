@@ -98,18 +98,35 @@ function selectService(serviceName) {
 }
 
 /* =========================================
+   CAMPO ANDAR — MOSTRAR / OCULTAR
+   ========================================= */
+function toggleAndar(valor) {
+  const grupo = document.getElementById('group-andar');
+  if (!grupo) return;
+  if (valor === 'Andar') {
+    grupo.style.display = 'block';
+  } else {
+    grupo.style.display = 'none';
+    const input = document.getElementById('floorNumber');
+    if (input) input.value = '';
+  }
+}
+
+/* =========================================
    ENVIAR ORÇAMENTO VIA WHATSAPP
    ========================================= */
 function enviarOrcamento() {
-  const nome     = document.getElementById('clientName').value.trim();
-  const tipo     = document.getElementById('eventType').value;
-  const local    = document.getElementById('installLocation').value;
-  const parede   = document.getElementById('wallType').value;
-  const modelo   = document.getElementById('airModel').value;
-  const btus     = document.getElementById('airBTUs').value;
-  const qtd      = document.getElementById('airQty').value;
-  const problema = document.getElementById('problemDesc').value.trim();
-  const obs      = document.getElementById('obs').value.trim();
+  const nome       = document.getElementById('clientName').value.trim();
+  const tipo       = document.getElementById('eventType').value;
+  const local      = document.getElementById('installLocation').value;
+  const parede     = document.getElementById('wallType').value;
+  const floorType  = document.getElementById('floorType').value;
+  const floorNum   = document.getElementById('floorNumber').value.trim();
+  const modelo     = document.getElementById('airModel').value;
+  const btus       = document.getElementById('airBTUs').value;
+  const qtd        = document.getElementById('airQty').value;
+  const problema   = document.getElementById('problemDesc').value.trim();
+  const obs        = document.getElementById('obs').value.trim();
 
   if (!nome || !tipo) {
     // Feedback visual sutil ao invés de alert
@@ -130,6 +147,10 @@ function enviarOrcamento() {
   msg += `👤 *Cliente:* ${nome}%0A`;
   msg += `🛠 *Serviço:* ${tipo}%0A`;
   if (local !== 'Não se aplica') msg += `🏠 *Local:* ${local}%0A`;
+  if (floorType !== 'Não se aplica') {
+    const andarInfo = (floorType === 'Andar' && floorNum) ? `${floorType} — ${floorNum}º andar` : floorType;
+    msg += `🏢 *Altura:* ${andarInfo}%0A`;
+  }
   if (parede !== 'Não se aplica') msg += `🧱 *Parede:* ${parede}%0A`;
   msg += `❄️ *Aparelho:* ${modelo} (${btus})%0A`;
   msg += `🔢 *Quantidade:* ${qtd} unid.%0A`;

@@ -307,6 +307,22 @@
                     </div>
                 </div>
 
+                <!-- Campo altura / andar -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="floorType">Altura do Local</label>
+                        <select id="floorType" class="form-select" onchange="toggleAndar(this.value)">
+                            <option value="Não se aplica">Não se aplica</option>
+                            <option value="Térreo">Térreo</option>
+                            <option value="Andar">Andar (Apto / Sala)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="group-andar" style="display:none;">
+                        <label class="form-label" for="floorNumber">Qual Andar?</label>
+                        <input type="number" id="floorNumber" class="form-input" placeholder="Ex: 3" min="1" max="99">
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label" for="airModel">Modelo</label>
